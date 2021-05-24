@@ -1,2 +1,13 @@
 [build]
 functions = "functions"
+[context.production.environment]
+REACT_APP_STRIPE_PUBLIC_KEY = "pk_test_51IufD9FgamaVQHD5Pa7vGAPsz0OvHgDc639eoyuk8bBJd9Gun6nySWPXYSLmUriRHWGjwKs2sVt6KIXXtZBUugEo00eDp81UHk"
+REACT_APP_STRIPE_SECRET_KEY = "sk_test_51IufD9FgamaVQHD5WIMwTCdrsHAYN502SSWqzebsqS3BJPNeVlj2vIBSYEFqPITfdp4BqYQcnsWAkjbQQWdRvMp300LCU0eUzk"
+
+[context.staging.environment]
+REACT_APP_STRIPE_PUBLIC_KEY = "pk_test_51IufD9FgamaVQHD5Pa7vGAPsz0OvHgDc639eoyuk8bBJd9Gun6nySWPXYSLmUriRHWGjwKs2sVt6KIXXtZBUugEo00eDp81UHk"
+REACT_APP_STRIPE_SECRET_KEY = "sk_test_51IufD9FgamaVQHD5WIMwTCdrsHAYN502SSWqzebsqS3BJPNeVlj2vIBSYEFqPITfdp4BqYQcnsWAkjbQQWdRvMp300LCU0eUzk"
+
+# no API server exists for other branches, but code will still want a URL here so need to set a "default"
+[context.branch-deploy.environment]
+API_ENDPOINT = "https://invalid"
