@@ -1,5 +1,6 @@
 const fs = require('fs');
 const matter = require('gray-matter');
+const stripe = require('stripe')(process.env.REACT_APP_STRIPE_SECRET_KEY);
 
 
 const getProducts = () => {
@@ -27,11 +28,29 @@ exports.handler = async (event, context) => {
         }
     })
 
-    console.log(cartWithProducts)
+    const lineItems = cartWithProducts.map(product => ({
+        price_data: {
+            currency: 'gbp',
+            product_data: {
+                name: product.name,
+            },
+            unit_amount: product.price,
+        },
+        quantity: product.qty
+    }));
 
+    const session = await stripe.checkout.sessions.create({
+        payment_method_types: ["card"],
+        line_items: lineItems,
+        mode: 'payment',
+        success_url: `${event.headers.host}/success`,
+        cancel_url: `${event.headers.host}/cancelled`,
+    })
 
     return {
         statusCode: 200,
-        body: "Payment has been charged to card!"
+        body: JSON.stringify({
+            id: session.id
+        })
     }
 }
