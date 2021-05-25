@@ -31,6 +31,8 @@ exports.handler = async (event, context) => {
         cancel_url: `${process.env.URL}/cancelled`,
     })
 
+    console.log(session)
+
     return {
         statusCode: 200,
         body: JSON.stringify({
