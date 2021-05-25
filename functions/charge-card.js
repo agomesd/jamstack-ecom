@@ -31,6 +31,7 @@ exports.handler = async (event, context) => {
         cancel_url: `${process.env.URL}/cancelled`,
     })
 
+    console.log(process.env.STRIPE_SECRET_KEY)
     console.log(session)
 
     return {

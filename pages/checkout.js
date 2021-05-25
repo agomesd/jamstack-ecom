@@ -44,12 +44,11 @@ const Checkout = () => {
       id,
       qty,
     }));
-    const headers = {
-      
-    }
     
     const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
-    const { data } = await axios.post(url, { newCart }, { headers });
+    const { data } = await axios.post(url, { newCart });
+    console.log(data);
+    console.log(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY)
     await stripe.redirectToCheckout({ sessionId: data.id })
   };
 
