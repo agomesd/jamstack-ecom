@@ -1,6 +1,6 @@
 const fs = require('fs');
 const matter = require('gray-matter');
-const stripe = require('stripe')(process.env.REACT_APP_STRIPE_SECRET_KEY);
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 
 const getProducts = () => {
@@ -43,8 +43,8 @@ exports.handler = async (event, context) => {
         payment_method_types: ["card"],
         line_items: lineItems,
         mode: 'payment',
-        success_url: `${event.headers.host}/success`,
-        cancel_url: `${event.headers.host}/cancelled`,
+        success_url: `${process.env.URL}/success`,
+        cancel_url: `${process.env.URL}/cancelled`,
     })
 
     return {
