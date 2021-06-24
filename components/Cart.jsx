@@ -69,8 +69,26 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
+const ClearCartButton = styled.button`
+  margin: 2rem auto;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: #fff;
+  color: #f73e37;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f73e37;
+    color: #fff;
+  }
+`
+
 const Cart = () => {
-  const { cart, toggleCart, isOpen, total } = useCart();
+  const { cart, clearCart, toggleCart, isOpen, total } = useCart();
   const router = useRouter();
 
   const handleClick = () => {
@@ -80,6 +98,10 @@ const Cart = () => {
   const navigateToCheckout = () => {
     router.push("/checkout");
     toggleCart();
+  };
+
+  const handleClearCart = () => {
+    clearCart();
   };
 
   return (
@@ -108,6 +130,7 @@ const Cart = () => {
               <span>£{total / 100}</span>
             </Total>
             <Button onClick={navigateToCheckout}>Check Out</Button>
+            <ClearCartButton onClick={handleClearCart}>Clear Cart</ClearCartButton>
           </>
         ) : (
           <p>Cart is empty.</p>

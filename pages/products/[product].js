@@ -1,3 +1,4 @@
+import { NextSeo } from "next-seo";
 import fs from "fs";
 import matter from "gray-matter";
 import marked from "marked";
@@ -24,10 +25,12 @@ const Price = styled.span`
   margin-bottom: 1rem;
 `;
 
-const Product = ({ product: { data, content } }) => {
+const Product = ({ product: { data, content }, id }) => {
   const html = marked(content);
+
   return (
     <Page>
+      <NextSeo title={id} description={`${id} product description page.`} />
       <Title>
         <h1>{data.name}</h1>
         <Subtitle>{data.description}</Subtitle>
@@ -68,6 +71,16 @@ export const getStaticProps = async (context) => {
         data,
         content,
       },
+    },
+  };
+};
+
+export const getServersideProps = async ({ query }) => {
+  const { id } = query;
+
+  return {
+    props: {
+      id,
     },
   };
 };

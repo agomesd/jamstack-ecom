@@ -18,6 +18,12 @@ const NavContainer = styled.div`
   font-size: 2rem;
 `;
 
+const Logo = styled.a`
+  color: #f11866;
+  font-weight: 700;
+  cursor: pointer;
+`
+
 const ShoppingCartIcon = styled(FiShoppingCart)`
   margin-right: 1rem;
   cursor: pointer;
@@ -34,7 +40,7 @@ const Navbar = () => {
     <Nav>
       <NavContainer>
         <Link href="/">
-          <UnstyledLink>SoopaShop</UnstyledLink>
+          <Logo>SoopaShop</Logo>
         </Link>
         <ShoppingCartIcon onClick={handleClick}/>
       </NavContainer>
