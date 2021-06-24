@@ -41,17 +41,24 @@ const CartProvider = ({ children }) => {
     }
   };
 
-  const removeItemFromCart = (id) => {
-    const newCart = cart.filter((item) => {
-      return item.id !== id;
-    });
-    setCart(newCart);
+  const removeItemFromCart = (product, qty = 1) => {
+    const item = cart.find((i) => i.id === product.id);
+
+    if (product.qty > 1) {
+      item.qty -= qty;
+      setCart([...cart]);
+    } else {
+      const newCart = cart.filter((item) => {
+        return item.id !== product.id;
+      });
+      setCart(newCart);
+    }
   };
 
   const clearCart = () => {
-    localStorage.removeItem('cart');
+    localStorage.removeItem("cart");
     setCart([]);
-  }
+  };
 
   const exposed = {
     cart,
@@ -60,7 +67,7 @@ const CartProvider = ({ children }) => {
     toggleCart,
     isOpen,
     total,
-    clearCart
+    clearCart,
   };
 
   return <Context.Provider value={exposed}>{children}</Context.Provider>;

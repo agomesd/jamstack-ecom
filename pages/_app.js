@@ -29,7 +29,11 @@ const MyApp = ({ Component, pageProps }) => {
         <Page>
           <Component {...pageProps} />
         </Page>
-        <ToastContainer/>
+        <ToastContainer
+          position={"bottom-right"}
+          autoClose={2000}
+          pauseOnHover={false}
+        />
         <Cart />
       </Container>
     </CartProvider>

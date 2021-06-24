@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { FiX } from "react-icons/fi";
-import useCart from "../hooks/useCart";
+import { FiX, FiPlusSquare, FiMinusSquare } from "react-icons/fi";
 import { useRouter } from "next/router";
+import useCart from "../hooks/useCart";
 
 const Container = styled.div`
   position: fixed;
@@ -39,9 +39,11 @@ const Title = styled.h2`
 `;
 
 const Item = styled.li`
+  margin: 0.25rem 0;
   list-style: none;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   border-bottom: 1px solid #efefef;
   margin-bottom: 0.25rem;
 `;
@@ -80,15 +82,38 @@ const ClearCartButton = styled.button`
   background-color: #fff;
   color: #f73e37;
   cursor: pointer;
+  border: 1px solid transparent;
 
   &:hover {
     background-color: #f73e37;
     color: #fff;
   }
-`
+`;
+
+const IconBox = styled.div`
+  display: flex;
+`;
+
+const PlusContainer = styled.span`
+  color: green;
+  cursor: pointer;
+`;
+
+const MinusContainer = styled.span`
+  color: #f73e37;
+  cursor: pointer;
+`;
 
 const Cart = () => {
-  const { cart, clearCart, toggleCart, isOpen, total } = useCart();
+  const {
+    addItemToCart,
+    cart,
+    clearCart,
+    removeItemFromCart,
+    toggleCart,
+    isOpen,
+    total,
+  } = useCart();
   const router = useRouter();
 
   const handleClick = () => {
@@ -102,6 +127,14 @@ const Cart = () => {
 
   const handleClearCart = () => {
     clearCart();
+  };
+
+  const handleAddItemToCart = (product) => {
+    addItemToCart(product);
+  };
+
+  const handleRemoveItemFromCart = (product) => {
+    removeItemFromCart(product);
   };
 
   return (
@@ -121,6 +154,18 @@ const Cart = () => {
                       {item.qty} x {item.name}
                     </span>
                     <span>£{item.price / 100}</span>
+                    <IconBox>
+                      <PlusContainer>
+                        <FiPlusSquare
+                          onClick={() => handleAddItemToCart(item)}
+                        />
+                      </PlusContainer>
+                      <MinusContainer>
+                        <FiMinusSquare
+                          onClick={() => handleRemoveItemFromCart(item)}
+                        />
+                      </MinusContainer>
+                    </IconBox>
                   </Item>
                 );
               })}
@@ -130,7 +175,9 @@ const Cart = () => {
               <span>£{total / 100}</span>
             </Total>
             <Button onClick={navigateToCheckout}>Check Out</Button>
-            <ClearCartButton onClick={handleClearCart}>Clear Cart</ClearCartButton>
+            <ClearCartButton onClick={handleClearCart}>
+              Clear Cart
+            </ClearCartButton>
           </>
         ) : (
           <p>Cart is empty.</p>
