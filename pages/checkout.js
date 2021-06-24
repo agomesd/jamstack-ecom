@@ -91,8 +91,8 @@ const Checkout = () => {
           {isCheckout && (
             <ConfirmContainer>
               <p>
-                Disclaimer! £5 will be charged for every item unit and you will not
-                receive the item itself! These are just fictional products for
+                Disclaimer! £5 will be charged for every product unit and you will not
+                receive the product itself! These are just fictional products for
                 the purpose of the app however the money will be a donation and
                 much appreciated! Thank you :).
               </p>
