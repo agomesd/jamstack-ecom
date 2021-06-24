@@ -16,9 +16,9 @@ exports.handler = async (event, context) => {
         price_data: {
             currency: 'gbp',
             product_data: {
-                name: product.name,
+                name: 'Donate £5',
             },
-            unit_amount: product.price,
+            unit_amount: 5,
         },
         quantity: product.qty
     }));
