@@ -25,12 +25,12 @@ const Price = styled.span`
   margin-bottom: 1rem;
 `;
 
-const Product = ({ product: { data, content }, id }) => {
+const Product = ({ product: { data, content }}) => {
   const html = marked(content);
 
   return (
     <Page>
-      <NextSeo title={id} description={`${id} product description page.`} />
+      <NextSeo title='Product' description={`Product description page.`} />
       <Title>
         <h1>{data.name}</h1>
         <Subtitle>{data.description}</Subtitle>
@@ -71,16 +71,6 @@ export const getStaticProps = async (context) => {
         data,
         content,
       },
-    },
-  };
-};
-
-export const getServersideProps = async ({ query }) => {
-  const { id } = query;
-
-  return {
-    props: {
-      id,
     },
   };
 };

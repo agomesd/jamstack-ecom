@@ -3,6 +3,7 @@ import Link from "next/link";
 import fs from "fs";
 import matter from "gray-matter";
 import styled from "styled-components";
+import { toast } from "react-toastify";
 import UnstyledLink from "../components/styled/UnstyledLink";
 import useCart from "../hooks/useCart";
 
@@ -32,7 +33,7 @@ const Button = styled.button`
     background-color: #fff;
     color: #f11866;
   }
-`
+`;
 
 const ProductsContainer = styled.div`
   display: grid;
@@ -42,7 +43,7 @@ const ProductsContainer = styled.div`
 
   @media (max-width: 600px) {
     grid-template-columns: 1fr;
-  };
+  } ;
 `;
 
 const Price = styled.p`
@@ -57,6 +58,7 @@ const renderProduct = (product, addItemToCart) => {
   const handleClick = (e) => {
     e.stopPropagation();
     addItemToCart(product);
+    toast.success("Item added to cart!");
   };
 
   return (

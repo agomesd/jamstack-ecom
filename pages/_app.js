@@ -1,8 +1,10 @@
 import { Normalize } from "styled-normalize";
 import styled from "styled-components";
+import { ToastContainer } from "react-toastify";
 import Navbar from "../components/Navbar";
 import CartProvider from "../context/Cart";
-import Cart from '../components/Cart';
+import Cart from "../components/Cart";
+import "react-toastify/dist/ReactToastify.css";
 
 const Container = styled.div`
   @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap");
@@ -27,7 +29,8 @@ const MyApp = ({ Component, pageProps }) => {
         <Page>
           <Component {...pageProps} />
         </Page>
-      <Cart />
+        <ToastContainer/>
+        <Cart />
       </Container>
     </CartProvider>
   );

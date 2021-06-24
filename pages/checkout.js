@@ -1,3 +1,4 @@
+import { NextSeo } from 'next-seo'
 import Page from "../components/styled/Page";
 import useCart from "../hooks/useCart";
 import styled from "styled-components";
@@ -54,6 +55,7 @@ const Checkout = () => {
 
   return (
     <Page>
+      <NextSeo title='Checkout' description='SoopaShop checkout page'/>
       <h2>Checkout</h2>
       {cart.length > 0 ? (
         <>
